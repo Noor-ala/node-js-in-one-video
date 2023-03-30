@@ -1,5 +1,8 @@
 const http = require('http');
+const fs = require("fs");
 const server = http.createServer((req,res)=>{
+    const jsondata = fs.readFileSync("api.json","utf-8");
+    const objdata = JSON.parse(jsondata)
     if(req.url=="/"){ 
         res.end("hi this is my first node js server");  
     }
@@ -7,7 +10,7 @@ const server = http.createServer((req,res)=>{
     res.end("hi this is my first download page");  
    }
    else if(req.url==="/About"){
-    res.end("hi this is my first About page");  
+    res.end(objdata[0].name);  
    }
    else{
     res.end("404: page could not found");
