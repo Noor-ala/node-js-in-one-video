@@ -1,19 +1,24 @@
 const express = require("express");
-console.log(express);
+const path = require("path");
 const app = express()
 
+
+const pathdir=path.join(__dirname,'public')
+app.use(express.static(pathdir))
+
 app.get("/",(req,res)=>{
-    res.send("hi this is first express route")
+    res.sendFile(`${pathdir}/index.html`);
 
 })
 app.get("/about",(req,res)=>{
-    res.send("hi this is first express about route")
+    res.sendFile(`${pathdir}/home.html`);
 
 })
 app.get("/download",(req,res)=>{
-    res.send("download file")
+    res.download(`${pathdir}/home.html`)
+    });
 
-})
+
 app.listen(3000,()=>{
     console.log("server established");
 })
